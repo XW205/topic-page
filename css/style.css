@@ -1,87 +1,480 @@
+/* ============================================================
+   夜鹿 Yorushika · 「月夜の画集」主题
+   深夜蓝 × 和纸 × 灯橙
+   ============================================================ */
+
+:root {
+    --paper: #f4f0e5;           /* 和纸底色 */
+    --surface: #fffdf7;         /* 卡片纸面 */
+    --ink: #232b3a;             /* 夜墨色（正文） */
+    --ink-soft: #6a6f7c;        /* 次级文字 */
+    --night: #1b2737;           /* 深夜蓝（导航/按钮） */
+    --night-2: #2c3d58;
+    --amber: #d98a2b;           /* 灯橙（点缀） */
+    --amber-soft: #f4e3c4;
+    --line: #e5dfce;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(27, 39, 55, .05),
+                  0 8px 24px -14px rgba(27, 39, 55, .18);
+    --shadow-md: 0 2px 6px rgba(27, 39, 55, .06),
+                  0 20px 40px -18px rgba(27, 39, 55, .28);
+    --ease-out: cubic-bezier(.22, .61, .36, 1);
+    --serif: "Shippori Mincho B1", "Yu Mincho", "Hiragino Mincho ProN",
+             "Noto Serif SC", "Songti SC", "SimSun", serif;
+    --sans: "Noto Sans SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+}
+
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 body {
-    background-color: #f6f9ea;
-    font-family: "Microsoft YaHei", sans-serif;
     margin: 0;
-    color: #333;
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.85;
+    letter-spacing: .02em;
+    background-color: var(--paper);
+    background-image:
+        radial-gradient(ellipse 60% 40% at 15% -5%, rgba(217, 138, 43, .08), transparent 60%),
+        radial-gradient(ellipse 60% 45% at 90% 105%, rgba(44, 61, 88, .10), transparent 60%);
+    background-attachment: fixed;
+}
+
+::selection {
+    background: var(--amber);
+    color: #fff;
+}
+
+/* ---------- 顶部导航 ---------- */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, var(--night) 0%, var(--night-2) 100%);
+    box-shadow: 0 4px 20px -10px rgba(15, 23, 35, .6);
 }
 
 .nav-wrap {
-    max-width: 960px;
-    padding: 12px 16px;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 14px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
 }
 
 .logo {
     text-decoration: none;
-    color: #333;
+    color: #f5efe1;
+}
+
+.logo h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo h1::before {
+    content: "☾";
+    color: var(--amber);
+    font-size: 1.15em;
+    line-height: 1;
 }
 
 .main-nav {
     display: flex;
-    gap: 16px;
+    gap: 6px;
 }
 
 .main-nav a {
+    position: relative;
+    padding: 6px 14px;
     text-decoration: none;
-    color: #272727;
+    color: rgba(245, 239, 225, .75);
+    font-size: .92rem;
+    letter-spacing: .15em;
+    border-radius: var(--radius-pill);
+    transition: color .25s var(--ease-out), background-color .25s var(--ease-out);
+}
+
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 0;
+    height: 2px;
+    background: var(--amber);
+    border-radius: 2px;
+    transition: width .25s var(--ease-out), left .25s var(--ease-out);
+}
+
+.main-nav a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .06);
+}
+
+.main-nav a:hover::after {
+    width: 55%;
+    left: 22.5%;
+}
+
+/* ---------- 区块 ---------- */
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 8px 20px 24px;
 }
 
 section {
-    background-color: #ffffff;
-    max-width: 960px;
-    margin: 10px auto;
-    border-radius: 8px;
-    padding: 24px 16px;
+    background: var(--surface);
+    margin: 22px 0;
+    padding: 36px 36px 40px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    scroll-margin-top: 86px;
 }
 
-footer {
-    color: #333;
-    text-align: center;
-    padding: 24px 0;
+section h2 {
+    margin: 0 0 22px;
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.4;
 }
 
-.card-grid {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 16px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1fr));
-    gap: 16px;
+section h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .18em;
+    bottom: .18em;
+    width: 5px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--amber), #e8b06a);
 }
 
+#intro p {
+    margin: 0 0 16px;
+    color: #424a59;
+    font-size: .98rem;
+}
+
+#intro p:last-child { margin-bottom: 0; }
+
+#intro p:first-of-type::first-letter {
+    font-family: var(--serif);
+    font-size: 2.6em;
+    font-weight: 700;
+    float: left;
+    line-height: 1;
+    margin: .08em .12em 0 0;
+    color: var(--amber);
+}
+
+#intro b {
+    color: var(--night);
+    font-weight: 700;
+}
+
+/* ---------- 卡片网格 ---------- */
+
+.card-grid,
 .card-grid-music {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 16px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 22px;
+    margin-top: 22px;
 }
+
+/* ---------- 专辑卡片（画集式通栏封面） ---------- */
 
 .album-card {
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
 }
+
+.album-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+}
+
+.cover-link {
+    display: block;
+    line-height: 0;           /* 消除图片下方的基线间隙 */
+    cursor: zoom-in;
+}
+
+.album-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background-color: #e9e3d3;
+    transition: transform .6s var(--ease-out);
+}
+
+.album-card:hover img {
+    transform: scale(1.06);
+}
+
+.album-card h3 {
+    margin: 16px 20px 6px;
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: .04em;
+}
+
+.album-card p {
+    flex: 1;
+    margin: 0 20px 18px;
+    font-size: .86rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* 试听按钮 */
+
+.album-card .listen-link {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 20px 20px;
+    padding: 9px 24px;
+    font-family: var(--sans);
+    font-size: .85rem;
+    letter-spacing: .25em;
+    text-indent: .25em;          /* 抵消字距造成的视觉偏移 */
+    text-decoration: none;
+    color: #f5efe1;
+    background: linear-gradient(135deg, var(--night) 0%, var(--night-2) 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: 0 6px 16px -8px rgba(27, 39, 55, .7);
+    transition: background .3s var(--ease-out), color .3s var(--ease-out),
+                transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+}
+
+.album-card .listen-link::before {
+    content: "▶";
+    font-size: .7em;
+    color: var(--amber);
+    transition: color .3s var(--ease-out), transform .3s var(--ease-out);
+}
+
+.album-card .listen-link:hover {
+    color: var(--night);
+    background: linear-gradient(135deg, var(--amber) 0%, #e8b06a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px -8px rgba(217, 138, 43, .65);
+}
+
+.album-card .listen-link:hover::before {
+    color: var(--night);
+    transform: translateX(3px);
+}
+
+.album-card .listen-link:active {
+    transform: translateY(0) scale(.97);
+}
+
+/* ---------- 曲目卡片 ---------- */
 
 .music-card {
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 4px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid transparent;
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out),
+                border-color .3s var(--ease-out);
 }
 
-@media (min-width: 768px) {
-.card-grid { grid-template-columns: repeat(2, 1fr); }
-.card-grid-music { grid-template-columns: repeat(2, 1fr); }
+.music-card::before {
+    content: "♪";
+    flex: none;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--amber);
+    background: var(--amber-soft);
+    border-radius: 50%;
+    transition: background .3s var(--ease-out), color .3s var(--ease-out),
+                transform .3s var(--ease-out);
 }
 
-@media (min-width: 992px) {
-.card-grid { grid-template-columns: repeat(3, 1fr); }
+.music-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--amber);
+}
+
+.music-card:hover::before {
+    background: var(--amber);
+    color: #fff;
+    transform: rotate(-12deg) scale(1.08);
+}
+
+.music-card h3 {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    align-self: center;
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+}
+
+.music-card p {
+    margin: 8px 0 0;
+    padding-left: 52px;
+    flex-basis: 100%;
+    font-size: .84rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+}
+
+/* ---------- 页脚 ---------- */
+
+footer {
+    padding: 32px 20px 40px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-family: var(--serif);
+    letter-spacing: .3em;
+    font-size: .9rem;
+}
+
+footer::before,
+footer::after {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 1px;
+    vertical-align: middle;
+    margin: 0 14px;
+    background: var(--line);
+}
+
+/* ---------- 键盘焦点 ---------- */
+
+a:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* 专辑链接额外提供不依赖 :focus-visible 启发式的焦点环，
+   保证合成输入/旧浏览器下键盘焦点同样可见 */
+.listen-link:focus {
+    outline: 2px solid var(--amber);
+    outline-offset: 2px;
+    border-radius: var(--radius-pill);
+}
+
+/* 封面在卡片顶部且卡片 overflow:hidden，用内嵌环避免被裁切 */
+.cover-link:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 3px var(--amber);
+}
+
+/* ---------- 入场动效 ---------- */
+
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+section {
+    animation: rise-in .7s var(--ease-out) both;
+}
+
+.album-card,
+.music-card {
+    /* backwards：延迟期间停留在首帧；结束后不锁定 transform，保证 hover 上浮生效 */
+    animation: rise-in .6s var(--ease-out) backwards;
+}
+
+.album-card:nth-child(2),
+.music-card:nth-child(2) { animation-delay: .06s; }
+.album-card:nth-child(3),
+.music-card:nth-child(3) { animation-delay: .12s; }
+.album-card:nth-child(4),
+.music-card:nth-child(4) { animation-delay: .18s; }
+.album-card:nth-child(5),
+.music-card:nth-child(5) { animation-delay: .24s; }
+.album-card:nth-child(6),
+.music-card:nth-child(6) { animation-delay: .30s; }
+
+/* ---------- 移动端 ---------- */
+
+@media (max-width: 640px) {
+    .nav-wrap {
+        justify-content: center;
+        text-align: center;
+    }
+
+    section {
+        padding: 26px 20px 28px;
+        margin: 16px 0;
+    }
+
+    section h2 { font-size: 1.35rem; }
+
+    .card-grid,
+    .card-grid-music {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    #intro p:first-of-type::first-letter {
+        font-size: 2.2em;
+    }
+}
+
+/* ---------- 降低动效偏好 ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
 }
